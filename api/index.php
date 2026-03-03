@@ -19,15 +19,15 @@ if (strpos($uri, '/assets/') === 0) {
 
 // Handle request
 if ($uri == '/' || $uri == '') {
-    require 'index.php';
+    require __DIR__ . '/../index.php';
 }
 else {
     $file = ltrim($uri, '/');
     if (file_exists($file) && is_file($file)) {
-        require $file;
+        require __DIR__ . '/../' . $file;
     }
     else if (file_exists($file . '.php')) {
-        require $file . '.php';
+        require __DIR__ . '/../' . $file . '.php';
     }
     else {
         http_response_code(404);

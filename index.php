@@ -1,5 +1,5 @@
 <?php
-require_once 'functions/helpers.php';
+require_once __DIR__ . '/functions/helpers.php';
 
 // Check login first
 check_login();
