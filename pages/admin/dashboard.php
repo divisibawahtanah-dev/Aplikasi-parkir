@@ -1,6 +1,6 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../functions/helpers.php';
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../functions/helpers.php';
 check_login();
 check_role(['admin']);
 ?>
@@ -18,10 +18,10 @@ check_role(['admin']);
             <div class="card-body">
                 <h5 class="card-title">Total User</h5>
                 <p class="card-text fs-2">
-                    <?php 
-                    $res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_users");
-                    echo mysqli_fetch_assoc($res)['total'];
-                    ?>
+                    <?php
+$res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_users");
+echo mysqli_fetch_assoc($res)['total'];
+?>
                 </p>
             </div>
         </div>
@@ -31,10 +31,10 @@ check_role(['admin']);
             <div class="card-body">
                 <h5 class="card-title">Area Parkir</h5>
                 <p class="card-text fs-2">
-                    <?php 
-                    $res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_area_parkir");
-                    echo mysqli_fetch_assoc($res)['total'];
-                    ?>
+                    <?php
+$res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_area_parkir");
+echo mysqli_fetch_assoc($res)['total'];
+?>
                 </p>
             </div>
         </div>
@@ -44,10 +44,10 @@ check_role(['admin']);
             <div class="card-body">
                 <h5 class="card-title">Kendaraan</h5>
                 <p class="card-text fs-2">
-                    <?php 
-                    $res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_kendaraan");
-                    echo mysqli_fetch_assoc($res)['total'];
-                    ?>
+                    <?php
+$res = mysqli_query($conn, "SELECT count(*) as total FROM tabel_kendaraan");
+echo mysqli_fetch_assoc($res)['total'];
+?>
                 </p>
             </div>
         </div>

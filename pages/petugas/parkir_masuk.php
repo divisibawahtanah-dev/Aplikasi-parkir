@@ -1,6 +1,6 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../functions/helpers.php';
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../functions/helpers.php';
 check_login();
 check_role(['petugas']);
 
@@ -18,16 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($area['terisi'] >= $area['kapasitas']) {
         set_flash_message('danger', 'Area parkir penuh!');
-    } else {
+    }
+    else {
         $query = "INSERT INTO tabel_transaksi (kode_transaksi, id_kendaraan, id_area, id_user, plat_nomor, jam_masuk, status, tanggal_transaksi) 
                   VALUES ('$kode_transaksi', '$id_kendaraan', '$id_area', '$id_user', '$plat_nomor', '$jam_masuk', 'masuk', CURDATE())";
-        
+
         if (mysqli_query($conn, $query)) {
             // Update Area Capacity
             mysqli_query($conn, "UPDATE tabel_area_parkir SET terisi = terisi + 1 WHERE id_area = '$id_area'");
             log_activity("Mencatat kendaraan masuk: $plat_nomor (Kode: $kode_transaksi)");
             set_flash_message('success', 'Kendaraan berhasil masuk. Kode: <b>' . $kode_transaksi . '</b>');
-        } else {
+        }
+        else {
             set_flash_message('danger', 'Gagal mencatat transaksi: ' . mysqli_error($conn));
         }
     }
@@ -54,24 +56,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label class="form-label">Jenis Kendaraan</label>
                         <select class="form-select" name="id_kendaraan" required>
                             <?php
-                            $vk = mysqli_query($conn, "SELECT * FROM tabel_kendaraan");
-                            while($k = mysqli_fetch_assoc($vk)) {
-                                echo "<option value='{$k['id_kendaraan']}'>{$k['nama_kendaraan']}</option>";
-                            }
-                            ?>
+$vk = mysqli_query($conn, "SELECT * FROM tabel_kendaraan");
+while ($k = mysqli_fetch_assoc($vk)) {
+    echo "<option value='{$k['id_kendaraan']}'>{$k['nama_kendaraan']}</option>";
+}
+?>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Area Parkir</label>
                         <select class="form-select" name="id_area" required>
                             <?php
-                            $va = mysqli_query($conn, "SELECT * FROM tabel_area_parkir");
-                            while($a = mysqli_fetch_assoc($va)) {
-                                $sisa = $a['kapasitas'] - $a['terisi'];
-                                $disabled = $sisa <= 0 ? 'disabled' : '';
-                                echo "<option value='{$a['id_area']}' $disabled>{$a['nama_area']} (Sisa: $sisa)</option>";
-                            }
-                            ?>
+$va = mysqli_query($conn, "SELECT * FROM tabel_area_parkir");
+while ($a = mysqli_fetch_assoc($va)) {
+    $sisa = $a['kapasitas'] - $a['terisi'];
+    $disabled = $sisa <= 0 ? 'disabled' : '';
+    echo "<option value='{$a['id_area']}' $disabled>{$a['nama_area']} (Sisa: $sisa)</option>";
+}
+?>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Simpan Masuk</button>

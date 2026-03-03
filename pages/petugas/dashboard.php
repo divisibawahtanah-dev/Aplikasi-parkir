@@ -1,6 +1,6 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../functions/helpers.php';
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../functions/helpers.php';
 check_login();
 check_role(['petugas']);
 ?>
@@ -45,23 +45,23 @@ check_role(['petugas']);
                 </thead>
                 <tbody>
                     <?php
-                    // Display last 5 parked vehicles
-                    $query = "SELECT t.*, k.nama_kendaraan, a.nama_area 
+// Display last 5 parked vehicles
+$query = "SELECT t.*, k.nama_kendaraan, a.nama_area 
                               FROM tabel_transaksi t 
                               JOIN tabel_kendaraan k ON t.id_kendaraan = k.id_kendaraan
                               JOIN tabel_area_parkir a ON t.id_area = a.id_area
                               WHERE t.status = 'masuk'
                               ORDER BY t.jam_masuk DESC LIMIT 5";
-                    $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['plat_nomor'] . "</td>";
-                        echo "<td>" . $row['nama_kendaraan'] . "</td>";
-                        echo "<td>" . $row['jam_masuk'] . "</td>";
-                        echo "<td>" . $row['nama_area'] . "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
+$result = mysqli_query($conn, $query);
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['plat_nomor'] . "</td>";
+    echo "<td>" . $row['nama_kendaraan'] . "</td>";
+    echo "<td>" . $row['jam_masuk'] . "</td>";
+    echo "<td>" . $row['nama_area'] . "</td>";
+    echo "</tr>";
+}
+?>
                 </tbody>
             </table>
         </div>
