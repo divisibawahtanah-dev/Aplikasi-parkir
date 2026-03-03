@@ -20,6 +20,3 @@ else {
 if (!$conn_status) {
     die("Koneksi Database Gagal: " . mysqli_connect_error());
 }
-?>
-
-

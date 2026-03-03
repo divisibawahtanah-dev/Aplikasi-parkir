@@ -20,13 +20,16 @@ if (strpos($uri, '/assets/') === 0) {
 // Handle request
 if ($uri == '/' || $uri == '') {
     require 'index.php';
-} else {
+}
+else {
     $file = ltrim($uri, '/');
     if (file_exists($file) && is_file($file)) {
         require $file;
-    } else if (file_exists($file . '.php')) {
+    }
+    else if (file_exists($file . '.php')) {
         require $file . '.php';
-    } else {
+    }
+    else {
         http_response_code(404);
         echo "404 Not Found: " . $uri;
     }

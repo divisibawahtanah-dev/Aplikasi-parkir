@@ -24,4 +24,3 @@ switch ($role) {
         break;
 }
 exit;
-?>
