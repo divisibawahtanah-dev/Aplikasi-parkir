@@ -1,6 +1,6 @@
 <?php
-require_once 'config/database.php';
-require_once 'functions/helpers.php';
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/functions/helpers.php';
 
 if (isset($_SESSION['user'])) {
     redirect('index.php');
